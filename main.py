@@ -15,10 +15,26 @@
 # limitations under the License.
 #
 import webapp2
+from validation import valid_month, valid_day, valid_year
 
 form = """
-<form method="post" action="/testform">
-	<input name="q">
+<form method="post">
+	What is your birthday
+	<br>
+	<label>
+		Month
+		<input type="text" name="month">
+	</label>
+	<label>
+		Day
+		<input type="text" name="day">
+	</label>
+	<label>
+		Year
+		<input type="text" name="year">
+	</label>	
+	<br>
+	<br>
 	<input type="submit">
 </form>
 """
@@ -27,15 +43,20 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
 #        self.response.headers['Content-type'] = 'text/plain'
         self.response.write(form)
+    def post(self):
 
-class TestHandler(webapp2.RequestHandler):
-	def post(self):
-		q = self.request.get("q")
-		self.response.out.write(q)
-		#self.response.headers['Content-type'] = 'text/plain'
-		#self.response.write(self.request)
+    	user_month = valid_month(self.request.get('month'))
+    	user_day = valid_month(self.request.get('day'))
+    	user_year = valid_month(self.request.get('year'))
+    	
+
+    	if not (user_month and user_day and user_year):
+    		self.response.write(form)
+    	else:
+    		self.response.write("Thanks! That's a totally valid birthday!")
+
+		
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/testform', TestHandler)
+    ('/', MainHandler)
 ], debug=True)
