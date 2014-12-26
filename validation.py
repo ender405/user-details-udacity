@@ -43,7 +43,7 @@ def valid_month(month):
 
 def valid_day(day):
     try:
-        if isinstance(day, str) and int(day):
+        if isinstance(day, basestring) and int(day):
             if int(day) > 0 and int(day) < 32:
                 return int(day)
             else:

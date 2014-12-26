@@ -43,17 +43,17 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
 #        self.response.headers['Content-type'] = 'text/plain'
         self.response.write(form)
+
     def post(self):
 
     	user_month = valid_month(self.request.get('month'))
-    	user_day = valid_month(self.request.get('day'))
-    	user_year = valid_month(self.request.get('year'))
-    	
+    	user_day = valid_day(self.request.get('day'))
+    	user_year = valid_year(self.request.get('year'))
 
     	if not (user_month and user_day and user_year):
-    		self.response.write(form)
+    		self.response.out.write(form)
     	else:
-    		self.response.write("Thanks! That's a totally valid birthday!")
+    		self.response.out.write("Thanks! That's a totally valid birthday!")
 
 		
 
