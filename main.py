@@ -32,7 +32,8 @@ form = """
 	<label>
 		Year
 		<input type="text" name="year">
-	</label>	
+	</label>
+	<div style="color: red">%(error)s</div>	
 	<br>
 	<br>
 	<input type="submit">
@@ -40,9 +41,13 @@ form = """
 """
 
 class MainHandler(webapp2.RequestHandler):
+    
+    def write_form(self, error=""):
+    	self.response.out.write(form % {"error" : error})
+
     def get(self):
 #        self.response.headers['Content-type'] = 'text/plain'
-        self.response.write(form)
+        self.write_form()
 
     def post(self):
 
@@ -51,7 +56,7 @@ class MainHandler(webapp2.RequestHandler):
     	user_year = valid_year(self.request.get('year'))
 
     	if not (user_month and user_day and user_year):
-    		self.response.out.write(form)
+    		self.write_form("That doesn't look valid to me, friend")
     	else:
     		self.response.out.write("Thanks! That's a totally valid birthday!")
 
