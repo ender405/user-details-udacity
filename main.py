@@ -15,7 +15,8 @@
 # limitations under the License.
 #
 import webapp2
-from validation import valid_month, valid_day, valid_year
+from validation import valid_month, valid_day, valid_year, escape_html
+
 
 form = """
 <form method="post">
@@ -43,7 +44,7 @@ form = """
 class MainHandler(webapp2.RequestHandler):
     
     def write_form(self, error="", month="",day="",year=""):
-    	self.response.out.write(form % {"error" : error, "month" : month, "day" : day, "year" : year})
+    	self.response.out.write(form % {"error" : error, "month" : escape_html(month), "day" : escape_html(day), "year" : escape_html(year)})
 
     def get(self):
 #        self.response.headers['Content-type'] = 'text/plain'

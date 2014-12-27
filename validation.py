@@ -20,6 +20,11 @@
 #             return int(day)
 
 # my answers
+import cgi
+
+def escape_html(s):
+  return cgi.escape(s, quote = True)
+
 def valid_month(month):
     months = ['January',
           'February',
