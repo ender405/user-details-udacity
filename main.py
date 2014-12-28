@@ -103,7 +103,7 @@ class MainHandler(webapp2.RequestHandler):
     	verify = valid_verify(entry_password, entry_verify)
     	email = valid_email(entry_email)
 
-    	if (username and password and email):
+    	if (username and password and verify and email):
     		self.redirect("/welcome?username=%s" % escape_html(entry_username))
     	else:
     		errors = ["", "", "", ""]

@@ -36,7 +36,7 @@ def valid_password(password):
 
 def valid_verify(password, verify):
   if password == verify:
-    return verify
+    return True
   else:
     return None
 
