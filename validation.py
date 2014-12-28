@@ -43,7 +43,7 @@ def valid_verify(password, verify):
 EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
 def valid_email(email):
   if email == "":
-    return email
+    return True
   else:
     return EMAIL_RE.match(email)
 

@@ -25,24 +25,32 @@ form = """
 	Please enter your details
 	<br>
 	<label>
-		Username
-		<input type="text" name="username" value="%(username)s">
-		<div style="color: red">%(error_username)s</div>
+		<div name="input">
+            Username
+            <input type="text" name="username" value="%(username)s">
+    		<span style="color: red">%(error_username)s</span>
+        </div>
 	</label>
 	<label>
-		Password
-		<input type="password" name="password" value="%(password)s">
-		<div style="color: red">%(error_password)s</div>
+		<div name="input">
+            Password
+            <input type="password" name="password" value="%(password)s">
+            <span style="color: red">%(error_password)s</span>
+        </div>
 	</label>
 	<label>
-		Verify password
-		<input type="password" name="verify" value="%(verify)s">
-		<div style="color: red">%(error_verify)s</div>
+		<div name="input">
+            Verify password
+            <input type="password" name="verify" value="%(verify)s">
+            <span style="color: red">%(error_verify)s</span>
+        </div>
 	</label>
 	<label>
-		Email (optional)
-		<input type="text" name="email" value="%(email)s">
-		<div style="color: red">%(error_email)s</div>	
+		<div name="input">
+            Email (optional)
+            <input type="text" name="email" value="%(email)s">
+            <span style="color: red">%(error_email)s</span>
+        </div>	
 	</label>
 
 	
@@ -96,7 +104,7 @@ class MainHandler(webapp2.RequestHandler):
     	email = valid_email(entry_email)
 
     	if (username and password and email):
-    		self.redirect("/welcome")
+    		self.redirect("/welcome?username=%s" % escape_html(entry_username))
     	else:
     		errors = ["", "", "", ""]
     		if not username:
